@@ -1,6 +1,12 @@
 # HotBox
 A 3D printer enclosure controller built on an ESP32 microcontroller, integrated with OctoPrint running on a Raspberry Pi. The system maintains enclosure temperature via a PID control loop driving a heater and exhaust fan, with full remote control through the OctoPrint web interface.
 
+<div align="center">
+  
+<img width="500" height="300" alt="logo" src="https://github.com/user-attachments/assets/cb644c7b-7190-4e20-a875-cffae850734f" />
+
+</div>
+
 ---
 
 ## Table of Contents
