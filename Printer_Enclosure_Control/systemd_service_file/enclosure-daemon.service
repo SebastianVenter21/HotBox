@@ -1,0 +1,34 @@
+[Unit]
+Description=ESP32 Enclosure Daemon
+# Wait for the system to be fully up before starting.
+# This ensures /dev/ttyUSB0 is available and networking is ready.
+After=network.target
+
+[Service]
+Type=simple
+User=pi
+
+# Working directory — where the daemon and its venv live
+WorkingDirectory=/home/pi/enclosure_daemon
+
+# Full path to the venv Python binary + daemon script.
+# Using the venv's Python ensures all dependencies (pyserial, flask) are available
+# without touching the system Python environment.
+ExecStart=/home/pi/enclosure_daemon/venv/bin/python /home/pi/enclosure_daemon/enclosure_daemon.py
+
+# Automatically restart the daemon if it crashes or exits unexpectedly.
+# This covers serial errors, Python exceptions, or the ESP32 being unplugged.
+Restart=always
+
+# Wait 3 seconds before restarting — gives the USB port time to re-enumerate
+# if the ESP32 was disconnected and plugged back in.
+RestartSec=3
+
+# Pipe stdout and stderr to the systemd journal so logs are visible via:
+# sudo journalctl -u enclosure-daemon -f
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+# Start this service when the system reaches normal multi-user mode (i.e. on every boot).
+WantedBy=multi-user.target

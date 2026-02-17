@@ -1,0 +1,46 @@
+<div id="sidebar_plugin_enclosure_proxy">
+    <h4>Enclosure Status</h4>
+
+    <div class="enclosure-status">
+        <div class="status-row">
+            <span class="status-label">Temperature:</span>
+            <span id="enclosure-temp" class="status-value">--</span>
+        </div>
+        <div class="status-row">
+            <span class="status-label">RPM:</span>
+            <span id="enclosure-rpm" class="status-value">--</span>
+        </div>
+        <div class="status-row">
+            <span class="status-label">Mode:</span>
+            <span id="enclosure-mode" class="status-value">--</span>
+        </div>
+    </div>
+
+    <hr>
+
+    <h4>Control Mode</h4>
+    <div class="btn-group btn-block" data-toggle="buttons-radio">
+        <button class="btn mode-btn" data-mode="OFF">OFF</button>
+        <button class="btn mode-btn" data-mode="AUTO">AUTO</button>
+        <button class="btn mode-btn" data-mode="MANUAL">MANUAL</button>
+    </div>
+
+    <div id="auto-controls" style="display: none; margin-top: 15px;">
+        <h4>Setpoint</h4>
+        <div class="input-group">
+            <input type="number" id="setpoint-input" class="form-control" min="10" max="50" step="0.5" value="25">
+            <span class="input-group-addon">°C</span>
+        </div>
+        <button id="setpoint-btn" class="btn btn-primary btn-block" style="margin-top: 5px;">Set Setpoint</button>
+    </div>
+
+    <div id="manual-controls" style="display: none; margin-top: 15px;">
+        <h4>Heater Duty</h4>
+        <input type="range" id="heater-slider" min="0" max="100" value="0" step="5">
+        <span id="heater-value">0%</span>
+
+        <h4>Exhaust Duty</h4>
+        <input type="range" id="exhaust-slider" min="0" max="100" value="0" step="5">
+        <span id="exhaust-value">0%</span>
+    </div>
+</div>
