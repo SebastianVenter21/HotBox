@@ -90,14 +90,11 @@ void ExhaustFanControl::setFanDuty(float percent) {
 }
 
 void ExhaustFanControl::shutdown() {
-    // Safe shutdown sequence
+    // FIX: Do NOT call ledcDetachPin here.
+    // Detaching the PWM channel means the next setFanDuty() call has no pin to write to —
+    // the MOSFET turns on but the fan receives no PWM signal and stays at 0 RPM.
+    // Instead, just zero the duty and kill the MOSFET — the channel stays attached and ready.
     ledcWrite(_pwmChannel, 0);
     digitalWrite(_mosfetPin, LOW);
-    
-    // Detach and pull PWM pin LOW to prevent floating
-    ledcDetachPin(_pwmPin);
-    pinMode(_pwmPin, OUTPUT);
-    digitalWrite(_pwmPin, LOW);
-    
     _currentDuty = 0;
 }
